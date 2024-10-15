@@ -153,12 +153,3 @@ enum vmlsop       = { VLM, VSM }
 
 val vreg_write_callback = pure {c: "vreg_write_callback"} : (regidx, vregtype) -> unit
 
-/* Implementations of default callbacks for trace printing */
-
-val vreg_write_callback_default : (regidx, vregtype) -> unit
-function vreg_write_callback_default (reg, value) = {
-  let VLEN = unsigned(vlenb) * 8;
-  assert(0 < VLEN & VLEN <= sizeof(vlenmax));
-  print_reg("v" ^ dec_str(regidx_to_regno(reg)) ^ " <- " ^ BitStr(value[VLEN - 1 .. 0]))
-}
-

@@ -426,27 +426,3 @@ val freg_write_callback = pure {c: "freg_write_callback"} : (regidx, flenbits) -
 val csr_write_callback = pure {c: "csr_write_callback"} : (csreg, xlenbits) -> unit
 val csr_read_callback = pure {c: "csr_read_callback"} : (csreg, xlenbits) -> unit
 
-/* Implementations of default callbacks for trace printing */
-
-val mem_write_callback_default : forall 'n, 0 < 'n <= max_mem_access . (/* addr */ xlenbits, /* width */ int('n), /* value */ bits(8 * 'n)) -> unit
-function mem_write_callback_default (addr, width, value) = {
-  print_mem("mem[" ^ BitStr(addr) ^ "] <- " ^ BitStr(value))
-}
-
-val mem_read_callback_default : forall 'n, 0 < 'n <= max_mem_access . (/* access type */ string, /* addr */ xlenbits, /* width */ int('n), /* value */ bits(8 * 'n)) -> unit
-function mem_read_callback_default (t, addr, width, value) = {
-  print_mem("mem[" ^ t ^ "," ^ BitStr(addr) ^ "] -> " ^ BitStr(value))
-}
-
-val xreg_write_callback_default : (regidx, xlenbits) -> unit
-function xreg_write_callback_default (reg, value) = {
-  print_reg("x" ^ dec_str(regidx_to_regno(reg)) ^ " <- " ^ BitStr(value))
-}
-
-val freg_write_callback_default : (regidx, flenbits) -> unit
-function freg_write_callback_default (reg, value) = {
-  /* todo: will only print bits; should we print in floating point format? */
-  print_reg("f" ^ dec_str(regidx_to_regno(reg)) ^ " <- " ^ BitStr(value))
-}
-
-

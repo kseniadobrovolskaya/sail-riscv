@@ -339,16 +339,3 @@ scattered function read_CSR
 val write_CSR : (csreg, xlenbits) -> xlenbits
 scattered function write_CSR
 
-
-/* Implementations of default callbacks for trace printing */
-
-val csr_write_callback_default : (csreg, xlenbits) -> unit
-function csr_write_callback_default (csr, value) = {
-  print_reg("csr " ^ csr_name_map(csr) ^ " <- " ^ BitStr(value) ^ " (input: " ^ BitStr(value) ^ ")")
-}
-
-val csr_read_callback_default : (csreg, xlenbits) -> unit
-function csr_read_callback_default (csr, value) = {
-  print_reg("csr " ^ csr_name_map(csr) ^ " -> " ^ BitStr(value))
-}
-

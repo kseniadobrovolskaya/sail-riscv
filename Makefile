@@ -221,14 +221,7 @@ cloc:
 gcovr:
 	gcovr -r . --html --html-detail -o index.html
 
-c_preserve_fns=-c_preserve _set_Misa_C \
-  -c_preserve mem_write_callback_default \
-  -c_preserve mem_read_callback_default \
-  -c_preserve xreg_write_callback_default \
-  -c_preserve freg_write_callback_default \
-  -c_preserve csr_write_callback_default \
-  -c_preserve csr_read_callback_default \
-  -c_preserve vreg_write_callback_default
+c_preserve_fns=-c_preserve _set_Misa_C
 
 generated_definitions/c/riscv_model_$(ARCH).c: $(SAIL_SRCS) model/main.sail Makefile
 	mkdir -p generated_definitions/c
